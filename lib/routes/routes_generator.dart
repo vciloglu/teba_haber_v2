@@ -35,7 +35,6 @@ class RoutesGenerator {
     return MaterialPageRoute(
       builder: builder,
       settings: settings,
-      // burada geçiş animasyonunu değiştirebilirsiniz
       fullscreenDialog: true,
     );
   }
