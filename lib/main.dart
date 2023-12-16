@@ -20,6 +20,7 @@ class TebaMainApp extends StatelessWidget {
         initialRoute: '/login',
         onGenerateRoute: RoutesGenerator.generateRoute,
         theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xffF03057)),
           useMaterial3: true,
           inputDecorationTheme: Theme.of(context).inputDecorationTheme.copyWith(
                 border: const OutlineInputBorder(),

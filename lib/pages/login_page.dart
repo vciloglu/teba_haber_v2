@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:teba_haber_v2/core/ui/elevated_loading_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -37,19 +38,20 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: const InputDecoration(labelText: 'Şifre'),
                         ),
                         Align(
-                          alignment: Alignment.centerRight,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: const Size(88, 40),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
+                          alignment: Alignment.center,
+                          child: EasyButton(
+                            height: 45.0,
+                            onPressed: () async {
+                              print('click');
+                              await Future.delayed(const Duration(seconds: 2));
+                            },
+                            child: const Text(
+                              'Giriş',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
                               ),
                             ),
-                            onPressed: () {},
-                            child: const Text('Giriş'),
                           ),
                         )
                       ],
