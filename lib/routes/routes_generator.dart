@@ -3,6 +3,7 @@ import 'package:teba_haber_v2/pages/article_page.dart';
 import 'package:teba_haber_v2/pages/home_page.dart';
 import 'package:teba_haber_v2/pages/login_page.dart';
 import 'package:teba_haber_v2/pages/splash_page.dart';
+import 'package:teba_haber_v2/providers/articles/article_model.dart';
 
 class RoutesGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -10,7 +11,7 @@ class RoutesGenerator {
     WidgetBuilder builder;
     switch (settings.name) {
       case "/":
-        builder = (_) => SplashPage();
+        builder = (_) => const SplashPage();
 
         break;
       case "/home":
@@ -19,7 +20,8 @@ class RoutesGenerator {
       case "/article":
         if (args != null) {
           final argsMap = args as Map<String, dynamic>;
-          builder = (_) => ArticlePage(id: argsMap['id']);
+          builder =
+              (_) => ArticlePage(article: argsMap['article'] as ArticleModel);
         } else {
           builder = _errorRoute();
         }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:teba_haber_v2/core/network/cache_manager.dart';
 import 'package:teba_haber_v2/core/network/dio_exception.dart';
@@ -45,7 +45,9 @@ class IAuthManager extends ChangeNotifier with CacheManger {
       notifyListeners();
       return ResponseModel(message: "Giriş Başarılı", success: true);
     } on DioException catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
       String errorMessage = DioExceptionHandler.handleError(e);
       return ResponseModel(message: errorMessage, success: false);
       // Exception'ı fırlat

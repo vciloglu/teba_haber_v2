@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teba_haber_v2/providers/articles/data_manager.dart';
 import 'package:teba_haber_v2/providers/auth/auth_manager.dart';
 import 'package:teba_haber_v2/routes/routes_generator.dart';
 
@@ -14,10 +15,13 @@ class TebaMainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => IAuthManager())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => IAuthManager()),
+        ChangeNotifierProvider(create: (_) => IDataManager()),
+      ],
       child: MaterialApp(
         title: 'Teba Haber',
-        initialRoute: '/login',
+        initialRoute: '/home',
         onGenerateRoute: RoutesGenerator.generateRoute,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xffF03057)),

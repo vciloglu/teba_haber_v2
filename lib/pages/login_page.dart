@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:teba_haber_v2/core/ui/elevated_loading_button.dart';
@@ -42,7 +43,9 @@ class _LoginPageState extends State<LoginPage> {
                           child: EasyButton(
                             height: 45.0,
                             onPressed: () async {
-                              print('click');
+                              if (kDebugMode) {
+                                print('click');
+                              }
                               await Future.delayed(const Duration(seconds: 2));
                             },
                             child: const Text(
@@ -57,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

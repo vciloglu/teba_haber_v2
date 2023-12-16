@@ -5,7 +5,7 @@ class DioService {
   static final Dio _dio = Dio(BaseOptions(baseUrl: ApiConstant.apiUrl));
   static final Dio _dioAuth = Dio(BaseOptions(baseUrl: ApiConstant.authUrl));
 
-  // TODO interceptors
+  // TODO_interceptors
 
   DioService._();
 

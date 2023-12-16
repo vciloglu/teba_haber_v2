@@ -32,8 +32,8 @@ dependencies:
   dio: ^5.4.0
   flutter:
     sdk: flutter
-  flutter_html: ^2.2.1
   flutter_svg: ^0.22.0
+  flutter_widget_from_html_core: ^0.14.9
   provider: ^6.1.1
   shared_preferences: ^2.2.2
   url_launcher: ^6.2.2
