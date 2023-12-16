@@ -10,7 +10,7 @@ class RoutesGenerator {
     WidgetBuilder builder;
     switch (settings.name) {
       case "/":
-        builder = (_) => const SplashPage();
+        builder = (_) => SplashPage();
 
         break;
       case "/home":

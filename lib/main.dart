@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:teba_haber_v2/providers/auth/auth_manager.dart';
 import 'package:teba_haber_v2/routes/routes_generator.dart';
 
 void main() {
@@ -11,18 +13,21 @@ class TebaMainApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Teba Haber',
-      initialRoute: '/',
-      onGenerateRoute: RoutesGenerator.generateRoute,
-      // routes: {
-      //   "/": (context) => const SplashPage(),
-      //   "/home": (context) => const HomePage(),
-      //   "/article": (context) => const ArticlePage(),
-      //   "/login": (context) => const LoginPage(),
-      // },
-      theme: ThemeData(
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => IAuthManager())],
+      child: MaterialApp(
+        title: 'Teba Haber',
+        initialRoute: '/login',
+        onGenerateRoute: RoutesGenerator.generateRoute,
+        theme: ThemeData(
+          useMaterial3: true,
+          inputDecorationTheme: Theme.of(context).inputDecorationTheme.copyWith(
+                border: const OutlineInputBorder(),
+                isDense: true,
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              ),
+        ),
       ),
     );
   }

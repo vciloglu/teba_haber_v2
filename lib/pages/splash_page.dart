@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:teba_haber_v2/providers/auth/auth_manager.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -10,7 +12,11 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
+    IAuthManager iAuth = Provider.of<IAuthManager>(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        iAuth.loginHandler('kminchelle', '0lelplR');
+      }),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
