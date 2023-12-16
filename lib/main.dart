@@ -21,7 +21,7 @@ class TebaMainApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Teba Haber',
-        initialRoute: '/home',
+        initialRoute: '/',
         onGenerateRoute: RoutesGenerator.generateRoute,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xffF03057)),
