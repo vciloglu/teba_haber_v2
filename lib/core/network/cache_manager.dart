@@ -15,6 +15,12 @@ mixin CacheManger {
     return token;
   }
 
+  // has  token
+  Future<bool> hasToken() async {
+    String? token = await getToken();
+    return token != null && token.isNotEmpty;
+  }
+
   Future<void> removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('token');
