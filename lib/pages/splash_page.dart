@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teba_haber_v2/core/network/cache_manager.dart';
 import 'package:teba_haber_v2/providers/articles/data_manager.dart';
+import 'package:teba_haber_v2/providers/auth/auth_manager.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -11,13 +12,17 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> with CacheManger {
-  bool auth = false;
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await respondGetArticles();
+      // await respondGetArticles();
+      await Future.delayed(const Duration(seconds: 1));
+      bool isAuth = await hasToken();
+      if (isAuth) {
+        await respondAvailableCategories();
+      }
       goToHome();
     });
   }
@@ -43,7 +48,12 @@ class _SplashPageState extends State<SplashPage> with CacheManger {
     setState(() {});
   }
 
+  Future<void> respondAvailableCategories() async {
+    await context.read<IAuthManager>().getUserAvailableCategories();
+    setState(() {});
+  }
+
   void goToHome() {
-    Navigator.pushNamed(context, '/home');
+    Navigator.pushReplacementNamed(context, '/home');
   }
 }

@@ -4,7 +4,9 @@ import 'package:teba_haber_v2/core/constant/padding.dart';
 import 'package:teba_haber_v2/core/network/cache_manager.dart';
 import 'package:teba_haber_v2/providers/articles/article_model.dart';
 import 'package:teba_haber_v2/providers/articles/data_manager.dart';
+import 'package:teba_haber_v2/providers/auth/auth_manager.dart';
 import 'package:teba_haber_v2/widgets/card_view.dart';
+import 'package:teba_haber_v2/widgets/end_drawer_categories.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,17 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with CacheManger {
-  bool isAuthenticated = false;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
-    checkAuthenticate();
   }
 
   Future<void> checkAuthenticate() async {
-    bool? token = await hasToken();
-    isAuthenticated = token;
     setState(() {});
   }
 
@@ -33,20 +32,21 @@ class _HomePageState extends State<HomePage> with CacheManger {
     TextTheme textTheme = Theme.of(context).textTheme;
     // get provider base
     IDataManager iData = Provider.of<IDataManager>(context);
+    IAuthManager iAuth = Provider.of<IAuthManager>(context);
     // get provider watch list
     List<ArticleModel> articles = iData.articles;
     bool isLoading = iData.listGetLoading;
+    bool isAuth = iAuth.isAuth;
     return PopScope(
       canPop: false,
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          removeToken();
-        }),
+        key: scaffoldKey,
+        endDrawer: isAuth == true ? const CategoriesDrawerWidget() : null,
         appBar: AppBar(
             automaticallyImplyLeading: false,
             scrolledUnderElevation: 0,
             title: const Text("Teba Haber"),
-            actions: [authController()]),
+            actions: [authController(isAuth)]),
         body: Padding(
           padding: PaddingConstant.pageContainer,
           child: Column(
@@ -83,11 +83,14 @@ class _HomePageState extends State<HomePage> with CacheManger {
     );
   }
 
-  IconButton authController() {
+  IconButton authController(isAuthenticated) {
     if (isAuthenticated) {
       // open drawer
       return IconButton(
-          onPressed: () {}, icon: const Icon(Icons.menu_open_outlined));
+          onPressed: () {
+            scaffoldKey.currentState?.openEndDrawer();
+          },
+          icon: const Icon(Icons.menu_open_outlined));
     } else {
       return IconButton(
         onPressed: () {

@@ -6,6 +6,7 @@ import 'package:teba_haber_v2/core/network/cache_manager.dart';
 import 'package:teba_haber_v2/core/network/dio_exception.dart';
 import 'package:teba_haber_v2/core/network/dio_service.dart';
 import 'package:teba_haber_v2/providers/articles/article_model.dart';
+import 'package:teba_haber_v2/providers/auth/auth_manager.dart';
 
 class IDataManager extends ChangeNotifier with CacheManger {
   final Dio _dio = DioService.dio;
@@ -57,5 +58,9 @@ class IDataManager extends ChangeNotifier with CacheManger {
       return ResponseModel(message: errorMessage, success: false);
       // Exception'ı fırlat
     }
+  }
+
+  void updateArticles(IAuthManager authProvider) {
+    getArticles(null);
   }
 }

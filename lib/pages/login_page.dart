@@ -32,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
     ResponseModel? response =
         await authManager.loginHandler(username, password);
 
-    print(response);
     if (response != null && response.success) {
       // giriş başarılı
       // giriş başarılı ise drawer kategorileri zaten authmanager içerisinde yapılacaktır. token zaten set ediytolyor
@@ -45,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   goToHomepage() {
-    Navigator.pushNamed(context, '/home');
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   showMessageHandler(bool success, String message) {

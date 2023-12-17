@@ -17,9 +17,23 @@ class IAuthManager extends ChangeNotifier with CacheManger {
   // User Data
   late UserModel? _user;
   List<AvailableCategoryModel> userAvailableCategories = [];
-
+  bool _isAuth = false;
   // get data
   UserModel? get user => _user;
+  bool get isAuth => _isAuth;
+  // chekc user
+  void logoutHandler() {
+    changeAuth();
+    _user = null;
+    userAvailableCategories = [];
+    notifyListeners();
+  }
+
+  void changeAuth() {
+    _isAuth = !_isAuth;
+    removeToken();
+    notifyListeners();
+  }
 
   // login handler
   Future<ResponseModel?> loginHandler(String username, String password) async {
@@ -41,12 +55,13 @@ class IAuthManager extends ChangeNotifier with CacheManger {
         // giriş başarılı
         // şimdi kullanıcı kategorilerini set edelim
         await getUserAvailableCategories();
-        String? token = data['token'];
 
+        String? token = data['token'];
         // check response token validate
         if (token!.isNotEmpty) {
           saveToken(data['token']);
         }
+        changeAuth();
       }
 
       notifyListeners();

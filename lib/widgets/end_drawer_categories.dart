@@ -53,8 +53,8 @@ class _CategoriesDrawerWidgetState extends State<CategoriesDrawerWidget>
           ),
           ElevatedButton(
             onPressed: () {
-              removeToken();
-              Navigator.pushNamed(context, '/login');
+              Navigator.pop(context);
+              authManager.changeAuth();
             },
             child: const Text('Oturumu kapat'),
           ),

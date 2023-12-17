@@ -17,7 +17,10 @@ class TebaMainApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => IAuthManager()),
-        ChangeNotifierProvider(create: (_) => IDataManager()),
+        ChangeNotifierProxyProvider<IAuthManager, IDataManager>(
+          create: (_) => IDataManager(),
+          update: (_, auth, data) => data!..updateArticles(auth),
+        ),
       ],
       child: MaterialApp(
         title: 'Teba Haber',

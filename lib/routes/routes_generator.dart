@@ -37,7 +37,6 @@ class RoutesGenerator {
     return MaterialPageRoute(
       builder: builder,
       settings: settings,
-      fullscreenDialog: true,
     );
   }
 
