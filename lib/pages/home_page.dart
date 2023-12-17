@@ -85,7 +85,9 @@ class _HomePageState extends State<HomePage> with CacheManger {
 
   IconButton authController() {
     if (isAuthenticated) {
-      return IconButton(onPressed: () {}, icon: Icon(Icons.menu_open_outlined));
+      // open drawer
+      return IconButton(
+          onPressed: () {}, icon: const Icon(Icons.menu_open_outlined));
     } else {
       return IconButton(
         onPressed: () {

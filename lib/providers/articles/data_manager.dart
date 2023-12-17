@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:teba_haber_v2/core/model/response_model.dart';
 
 import 'package:teba_haber_v2/core/network/cache_manager.dart';
 import 'package:teba_haber_v2/core/network/dio_exception.dart';
@@ -57,13 +58,4 @@ class IDataManager extends ChangeNotifier with CacheManger {
       // Exception'ı fırlat
     }
   }
-}
-
-class ResponseModel {
-  String message;
-  bool success;
-  ResponseModel({
-    required this.message,
-    required this.success,
-  });
 }
