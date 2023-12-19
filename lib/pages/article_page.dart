@@ -25,6 +25,8 @@ class _ArticlePageState extends State<ArticlePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
+        forceMaterialTransparency: true,
+        foregroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           color: Colors.white,
